@@ -24,3 +24,23 @@ func TestNewDeck(t *testing.T) {
 		t.Errorf("Expected last card to be '%v', but got '%v'", expectedLastCard, deck[len(deck)-1])
 	}
 }
+
+func TestDeal(t *testing.T) {
+	deck := newDeck()
+	handSize := 5
+	hand, remainingDeck := deal(deck, handSize)
+	if len(hand) != handSize {
+		t.Errorf("Expected hand size of %v, but got %v", handSize, len(hand))
+	}
+	expectedRemainingDeckSize := len(deck) - handSize
+	if len(remainingDeck) != expectedRemainingDeckSize {
+		t.Errorf("Expected remaining deck size of %v, but got %v", expectedRemainingDeckSize, len(remainingDeck))
+	}
+
+	// Ensure that the deck was split correctly (i.e., no card is repeated)
+	for i := 0; i < handSize; i++ {
+		if hand[i] == remainingDeck[i] {
+			t.Errorf("Card '%v' was found in both hand and remaining deck at position %v", hand[i], i)
+		}
+	}
+}
