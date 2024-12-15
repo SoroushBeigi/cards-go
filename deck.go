@@ -44,3 +44,14 @@ func (d deck) saveToFile(filename string) error {
 	err := os.WriteFile(filename, []byte(d.toString()), 0666)
 	return err
 }
+
+func newDeckFromFile(filename string) deck {
+	bytes, err := os.ReadFile(filename)
+	if err != nil {
+		fmt.Println("Error: ", err)
+		os.Exit(1)
+	}
+	ss := strings.Split(string(bytes), ",")
+	return deck(ss)
+
+}
