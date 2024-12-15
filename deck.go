@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 type deck []string
 
@@ -29,4 +32,8 @@ func newDeck() deck {
 
 	return cards
 
+}
+func (d deck) toString() string {
+	deckString := strings.Join([]string(d), ",")
+	return deckString
 }

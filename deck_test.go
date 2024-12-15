@@ -44,3 +44,13 @@ func TestDeal(t *testing.T) {
 		}
 	}
 }
+
+func TestToString(t *testing.T) {
+	deck := newDeck()
+	dealtDeck, _ := deal(deck, 4)
+	resultString := dealtDeck.toString()
+	if resultString != "Spades of Ace,Spades of Two,Spades of Three,Spades of Four" {
+		t.Errorf("toString did not convert correctly")
+	}
+
+}
