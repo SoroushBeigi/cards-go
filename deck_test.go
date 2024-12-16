@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"testing"
 )
 
@@ -53,4 +54,19 @@ func TestToString(t *testing.T) {
 		t.Errorf("toString did not convert correctly")
 	}
 
+}
+
+func TestSaveToDeckAndNewDeckFromFile(t *testing.T) {
+	const filename = "_decktest"
+	os.Remove(filename)
+
+	deck := newDeck()
+	deck.saveToFile(filename)
+
+	loadedDeck := newDeckFromFile(filename)
+
+	if len(loadedDeck) != 52 {
+		t.Errorf("Expected 52 cards, got %v", len(loadedDeck))
+	}
+	os.Remove(filename)
 }
