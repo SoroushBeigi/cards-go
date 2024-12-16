@@ -38,7 +38,7 @@ func newDeck() deck {
 }
 
 func (d deck) toString() string {
-	deckString := strings.Join([]string(d), ",")
+	deckString := strings.Join(d, ",")
 	return deckString
 }
 
@@ -64,5 +64,5 @@ func newDeckFromFile(filename string) deck {
 		os.Exit(1)
 	}
 	ss := strings.Split(string(bytes), ",")
-	return deck(ss)
+	return ss
 }

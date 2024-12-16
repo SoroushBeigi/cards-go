@@ -57,16 +57,23 @@ func TestToString(t *testing.T) {
 }
 
 func TestSaveToDeckAndNewDeckFromFile(t *testing.T) {
-	const filename = "_decktest"
-	os.Remove(filename)
+	const filename = "_deck_test"
 
 	deck := newDeck()
-	deck.saveToFile(filename)
+
+	errSave := deck.saveToFile(filename)
+	if errSave != nil {
+		t.Errorf("File was not saved, got error: %v", errSave)
+	}
 
 	loadedDeck := newDeckFromFile(filename)
 
 	if len(loadedDeck) != 52 {
 		t.Errorf("Expected 52 cards, got %v", len(loadedDeck))
 	}
-	os.Remove(filename)
+
+	errRem := os.Remove(filename)
+	if errRem != nil {
+		t.Errorf("File was not removed, got error: %v", errRem)
+	}
 }
